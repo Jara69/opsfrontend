@@ -1,0 +1,26 @@
+<h1>games details :) </h1>
+<div class="rws">
+  <input class="form-control" name="Id" type="text" [(ngModel)]="id" placeholder="id">
+  <input class="form-control" name="Name" type="text" [(ngModel)]="name" placeholder="Name">
+  <input class="form-control" name="Price" type="text" [(ngModel)]="price" placeholder="Price">
+  <input class="form-control" name="Studio" type="text" [(ngModel)]="studio" placeholder="Studio">
+</div>
+<div class="idkbro">
+  <button class="btn-danger btn" (click)="addGame()">Add</button>
+  <table>
+    <thead>
+    <td>Id</td>
+    <td>Name</td>
+    <td>Price</td>
+    <td>Studio</td>
+    </thead>
+    <tr *ngFor="let gameDetail of games" class="gameDetail">
+      <td>{{gameDetail.id}}</td>
+      <td>{{gameDetail.name}}</td>
+      <td>{{gameDetail.price}}</td>
+      <td>{{gameDetail.studio}}</td>
+      <td><button class="btn-danger btn" (click)="checkGame(gameDetail.id)">Detail</button></td>
+      <td><button class="btn-danger btn" (click)="deleteGame(gameDetail.id)">Delete</button></td>
+    </tr>
+  </table>
+</div>

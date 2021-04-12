@@ -1,0 +1,10 @@
+<p>*detaily*</p>
+
+<div *ngIf="gameDetail" class="gameDetail">
+  <form>
+    <input [(ngModel)]="gameDetail.name" placeholder="name" name="name">
+    <input [(ngModel)]="gameDetail.price" placeholder="price" name="price">
+    <input [(ngModel)]="gameDetail.studio" placeholder="studio" name="studio">
+    <button (click)="editGame()">EDIT.</button>
+  </form>
+</div>

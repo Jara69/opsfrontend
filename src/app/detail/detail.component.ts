@@ -1,0 +1,45 @@
+import { Component, OnInit } from '@angular/core';
+import {Game} from '../Models/game-details';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CurrentUserService} from "../Current-user.service";
+
+@Component({
+  selector: 'app-detail',
+  templateUrl: './detail.component.html',
+  styleUrls: ['./detail.component.scss']
+})
+export class DetailComponent implements OnInit {
+
+  gameDetail: Game;
+  url = 'http://localhost:4200/Games/api/games/';
+
+  constructor(private http: HttpClient, private router: Router,
+              private activatedRoute: ActivatedRoute, private currentUser: CurrentUserService) {
+    if (currentUser.user == null) {
+      router.navigate(['/login']);
+    }
+  }
+
+  editGame() {
+    this.http.put(this.url + this.gameDetail.id, this.gameDetail).subscribe(
+      (data: Game) => {
+        this.gameDetail = data;
+      }, (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe(p => {
+      const id = p.get('id');
+      this.http.get(this.url + id).subscribe(
+        (data: Game) => {
+          this.gameDetail = data;
+        }, (error) => {
+          console.log(error);
+        });
+    });
+  }
+}
